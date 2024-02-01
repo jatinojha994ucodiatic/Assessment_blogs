@@ -1,0 +1,17 @@
+<div class="row">
+  <h2>All articles</h2>
+  <div class="col-8">
+    <% if @articles.nil? %>
+      <p>There's no articles</p>
+    <% else %>
+      <div class="d-flex flex-row justify-content-around">
+      <%= render @articles %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-4">
+    <h3>Links</h3>
+    <%= link_to 'Create new', new_article_path, class: "btn btn-sm btn-outline-secondary" %>
+  </div>
+
+</div>
