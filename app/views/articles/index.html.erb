@@ -1,7 +1,7 @@
 <div class="row">
-  <h2>All articles</h2>
+  <h2>My articles</h2>
   <div class="col-10">
-    <% if @articles.nil? %>
+    <% if @articles.blank? %>
       <p>There's no articles</p>
     <% else %>
       <div class="d-flex flex-row justify-content-between flex-wrap">

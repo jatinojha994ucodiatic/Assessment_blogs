@@ -1,4 +1,9 @@
 <h1>Home</h1>
-<div class="d-flex flex-row justify-content-between flex-wrap">
-  <%= render Article.all %>
+<div class="card">
+  <%= link_to 'Create new', new_article_path, class: "btn btn-sm btn-secondary" %>
+  <div class="card-body">
+    <div class="d-flex flex-row justify-content-between flex-wrap">
+      <%= render @articles %>
+    </div>
+  </div>
 </div>

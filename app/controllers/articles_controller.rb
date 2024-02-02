@@ -2,10 +2,10 @@ class ArticlesController < ApplicationController
   load_and_authorize_resource
   
   before_action :set_article, only: %i[ show edit destroy ]
-  before_action :authenticate_user!, only: %i[ new edit create update ]
+  before_action :authenticate_user!, only: %i[ index new edit create update ]
 
   def index
-    @articles = Article.all
+    @articles = current_user.articles
   end
 
   def new
@@ -23,7 +23,8 @@ class ArticlesController < ApplicationController
         flash[:notice] = "Article created successfully"
         format.html { redirect_to articles_path}
       else
-        format.html { render :new, status: :unprocessable_entity }
+        
+        format.html { render :new, status: :unprocessable_entity, alert: "Article creation failed" }
       end
     end
   end
@@ -45,9 +46,6 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    unless @article.user.email.eql?(current_user.email)
-      redirect_to articles_path, alert: "You're not authorized to edit this article"
-    end
     if @article.destroy
       redirect_to articles_path, alert: "#{@article.title} has been deleted", notice: "Article has been deleted."
     else

@@ -1,6 +1,11 @@
 
 <%= form_with(model: @article, scope: :article, url: url) do |form| %>
-
+  <% if @article.errors.any? %>
+    <div>Errors: <%= @article.errors.count %></div>
+    <% @article.errors.each do |error| %>
+      <p style="background-color: red;" class="d-inline-block"><%= error.full_message %></p><br>
+    <% end %>  
+  <% end %>
   <div class="form-group mb-2">
     <%= form.label :title, class: 'form-label' %>
     <%= form.text_field :title, class: 'form-control' %>
