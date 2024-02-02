@@ -23,8 +23,7 @@ class ArticlesController < ApplicationController
         flash[:notice] = "Article created successfully"
         format.html { redirect_to articles_path}
       else
-        
-        format.html { render :new, status: :unprocessable_entity, alert: "Article creation failed" }
+        format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
@@ -40,7 +39,7 @@ class ArticlesController < ApplicationController
         flash[:notice] = "Article created successfully"
         format.html { redirect_to article_path(@article) }  
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
       end
     end
   end
