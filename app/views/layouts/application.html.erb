@@ -11,12 +11,11 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="row" id="header">
-        <%= render 'layouts/header' %>
+    <%= render 'layouts/header' %>
+    <div class="container mt-4">
+      <div class="row" id="flashes">
+        <%= render 'layouts/flash' %>
       </div>
-        <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </body>

@@ -1,0 +1,5 @@
+<div id="flash" data-controller="flash-auto-hide">
+  <% flash.each do |key, value| %>
+    <%= content_tag :div, value, class: "#{key} flash-msg" %>
+  <% end %>
+</div>
