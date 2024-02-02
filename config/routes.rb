@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   root "home#index"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :articles
+  get 'articles/delete/:id', controller: "articles", action: "delete", as: :article_delete
   
   devise_for :users, controllers: {  
     sessions: 'users/sessions',
@@ -15,6 +17,5 @@ Rails.application.routes.draw do
     unlocks: 'users/unlocks'
   }
   
-  ActiveAdmin.routes(self)
 
 end

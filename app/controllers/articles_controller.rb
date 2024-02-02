@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  load_and_authorize_resource
+  
   before_action :set_article, only: %i[ show edit destroy ]
   before_action :authenticate_user!, only: %i[ new edit create update ]
 
@@ -11,16 +13,13 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    unless @article.user.email.eql?(current_user.email)
-      redirect_to articles_path, alert: "You're not authorized to edit this article"
-    end
   end
 
   def create
-    @article = Article.new(article_params.merge(user_id: current_user.id))
-    byebug
+  @article = current_user.articles.build(article_params)
     respond_to do |format|
-      if @article.save!
+      if @article.save
+        current_user.add_role :creator, @article
         flash[:notice] = "Article created successfully"
         format.html { redirect_to articles_path}
       else
@@ -36,6 +35,7 @@ class ArticlesController < ApplicationController
     @article = current_user.articles.find(params[:id])
     respond_to do |format|
       if @article.update(article_params)
+        current_user.add_role :editor, @article
         flash[:notice] = "Article created successfully"
         format.html { redirect_to article_path(@article) }  
       else
