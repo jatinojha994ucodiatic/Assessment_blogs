@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :custom_action
   
   before_action :set_article, only: %i[ show edit destroy ]
   before_action :authenticate_user!, only: %i[ index new edit create update ]
@@ -52,6 +53,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def custom_action
+    byebug
+  end
+
   protected
     def set_article
       @article = Article.friendly.find(params[:id])
@@ -59,6 +64,12 @@ class ArticlesController < ApplicationController
     
     def article_params
       params.require(:article).permit(:title, :body).merge(slug: params.dig(:article, :title))
+    end
+
+    def assign_fixed_attributes_for(action, object)
+      current_ability.attributes_for(action, object.class).each do |key, value|
+        trade.send("#{key}=", value)
+      end
     end
     
 end
