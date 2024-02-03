@@ -10,7 +10,7 @@
         <%= link_to "Delete", article_path(article), data: { "turbo": true, "turbo-method": :delete, "turbo-confirm": "Are you sure?"}, class: "text-danger" %>
         <%= link_to "Edit", edit_article_path(article), class: "card-link" %>
       <% end %>
-      <%= link_to "Back to articles", articles_path, class: "card-link" %>
+      <%= link_to "Back to articles", :back, class: "card-link" %>
     <% end %>
   </div>
 </div>

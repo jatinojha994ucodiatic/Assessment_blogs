@@ -1,5 +1,7 @@
 class Article < ApplicationRecord
   resourcify
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :finders]
   
   belongs_to :user
   has_many :users, -> { distinct }, through: :roles, class_name: 'User', source: :users

@@ -76,3 +76,4 @@ gem 'devise'
 gem "sass-rails"
 gem 'rolify'
 gem 'cancancan'
+gem 'friendly_id'

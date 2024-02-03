@@ -54,10 +54,10 @@ class ArticlesController < ApplicationController
 
   protected
     def set_article
-      @article = Article.find(params[:id])
+      @article = Article.friendly.find(params[:id])
     end
     
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body).merge(slug: params.dig(:article, :title))
     end
 end
