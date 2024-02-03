@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.accessible_by(current_ability)
   end
 end

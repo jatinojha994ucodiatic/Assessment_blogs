@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
   end
 
   def new
-    @post = Article.new
+    @article = Article.new
   end
 
   def edit
@@ -60,4 +60,5 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :body).merge(slug: params.dig(:article, :title))
     end
+    
 end
