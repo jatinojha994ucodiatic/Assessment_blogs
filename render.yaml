@@ -1,0 +1,22 @@
+databases:
+  - name: cmsproduction
+    databaseName: cmsproduction
+    user: cms
+    plan: free
+services:
+  - type: web
+    name: Assessment_Blog
+    plan: free
+    runtime: ruby
+    buildCommand: "./bin/render-build.sh"
+    # preDeployCommand: "./bin/rails db:migrate" # preDeployCommand only available on paid instance types
+    startCommand: "./bin/rails server"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cmsproduction
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: WEB_CONCURRENCY
+        value: 4 # sensible default
