@@ -1,8 +1,3 @@
-databases:
-  - name: cmsproduction
-    databaseName: cmsproduction
-    user: cms
-    plan: free
 services:
   - type: web
     name: Assessment_Blog
