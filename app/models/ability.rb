@@ -5,12 +5,15 @@ class Ability
 
   def initialize(user)
     can :read, Article
+    can :read, Comment
 
     return unless user.present?
     can :manage, Article, user: user
+    can :manage, Comment, user: user
 
     return unless user.has_role?(:admin)
     can :read, article
+    can :read, comment
     
   end
 end

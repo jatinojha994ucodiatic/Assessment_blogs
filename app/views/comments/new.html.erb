@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "comments_modal", target: :_top do %>
+  <div data-controller="comment-modal" data-action="turbo:submit-end->comment-modal#submitEnd">
+    <%= render 'comments/form', comment: @comment, article: @article %>
+  </div>
+<% end %>

@@ -1,13 +1,29 @@
-<div class="px-4 pt-5 my-5 text-center border-bottom">
-  <h1 class="display-4 fw-bold"><%= article.title %></h1>
-  <div class="col-lg-6 mx-auto">
-    <p class="lead mb-4"><%= article.body %></p>
+<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+  <div class="col-10 col-sm-6 col-lg-4">
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      <%= turbo_frame_tag "comments_modal" %>
+    </div>
+  </div>
+  <div class="col-10 col-sm-6 col-lg-8">
+    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><%= article.title %></h1>
+    <p class="lead"><%= article.body %></p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-md-start mb-3">
       <%= link_to "Back to articles", :back, class: "card-link" %>
       <% if can? :manage, article %>
         <%= link_to "Delete", article_delete_path(article), class: "btn btn-danger btn-sm" %>
         <%= link_to "Edit", edit_article_path(article), class: "btn btn-primary btn-sm" %>
       <% end %>
+      <% if can? :manage, Comment %>
+        <%= link_to "Add new comment", new_article_comment_path(article, Comment.new), data: { turbo_frame: "comments_modal" }, class: "btn btn-secondary btn-sm" %>
+      <% end %>
+    </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-md-start mb-3">
+      <div class="row">
+        <div id="comments">
+          <%= render article.comments %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

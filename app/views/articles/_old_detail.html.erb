@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-8">
+    <div class="px-4 pt-5 my-5 text-center border-bottom">
+      <h1 class="display-4 fw-bold"><%= article.title %></h1>
+      <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4"><%= article.body %></p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <%= link_to "Back to articles", :back, class: "card-link" %>
+          <% if can? :manage, article %>
+            <%= link_to "Delete", article_delete_path(article), class: "btn btn-danger btn-sm" %>
+            <%= link_to "Edit", edit_article_path(article), class: "btn btn-primary btn-sm" %>
+          <% end %>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <%= link_to "Add new comment", new_article_comment_path(article, Comment.new), data: { turbo_frame: "comments_modal" }, class: "btn btn-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-4">
+    <%= turbo_frame_tag "comments_modal" %>
+  </div>
+</div>

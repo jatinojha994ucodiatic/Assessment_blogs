@@ -53,10 +53,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_040702) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "article_id", null: false
+    t.bigint "user_id", null: false
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -107,4 +109,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_040702) do
 
   add_foreign_key "articles", "users"
   add_foreign_key "comments", "articles"
+  add_foreign_key "comments", "users"
 end

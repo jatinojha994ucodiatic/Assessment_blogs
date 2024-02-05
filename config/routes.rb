@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
   get 'articles/delete/:id', controller: "articles", action: "destroy", as: :article_delete
   
   devise_for :users, controllers: {  

@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   load_and_authorize_resource
+  # load_and_authorize_resource :only/:except => [:index, :show]
   skip_authorize_resource :only => :custom_action
   
   before_action :set_article, only: %i[ show edit destroy ]
@@ -68,7 +69,7 @@ class ArticlesController < ApplicationController
 
     def assign_fixed_attributes_for(action, object)
       current_ability.attributes_for(action, object.class).each do |key, value|
-        trade.send("#{key}=", value)
+        # trade.send("#{key}=", value)
       end
     end
     

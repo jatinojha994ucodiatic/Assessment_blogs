@@ -5,6 +5,7 @@ class Article < ApplicationRecord
   
   belongs_to :user
   has_many :users, -> { distinct }, through: :roles, class_name: 'User', source: :users
+  has_many :comments, dependent: :destroy
 
   validates :title, :body, presence: true
   
