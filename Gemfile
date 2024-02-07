@@ -75,3 +75,4 @@ gem "sass-rails"
 gem 'rolify'
 gem 'cancancan'
 gem 'friendly_id'
+gem "mailcatcher", "~> 0.2.4"

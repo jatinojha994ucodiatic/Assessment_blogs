@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  
+  before_filter :set_article, only: %i[ new ]
   # authorize_resource :class => false # authorize resource if there's no model class backing it.
   
   # You can specify which actions to affect using the :except and :only options, just like a before_filter.
@@ -9,7 +11,6 @@ class CommentsController < ApplicationController
   # skip_authorize_resource :only => :show  
   # skip_authorize_resource :post, :only => :show
   
-  before_action :set_article, only: %i[ new ]
   
   def new
     @comment = Comment.new

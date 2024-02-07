@@ -46,6 +46,7 @@ Rails.application.configure do
     host: 'localhost:3000', protocol: 'http'
   }
   config.action_mailer.perform_deliveries = true
+  # config.action_mailer.default_options = {from: '<your_usename@gmail.com>'} #Uncomment to override default
   config.action_mailer.delivery_method = :smtp
   # SMTP settings
   config.action_mailer.smtp_settings = {
