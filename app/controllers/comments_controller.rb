@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   
-  before_filter :set_article, only: %i[ new ]
+  before_action :set_article, only: %i[ new ]
   # authorize_resource :class => false # authorize resource if there's no model class backing it.
   
   # You can specify which actions to affect using the :except and :only options, just like a before_filter.
@@ -24,11 +24,15 @@ class CommentsController < ApplicationController
         format.turbo_stream { 
           render turbo_stream: [
             turbo_stream.prepend("comments", partial: "comment", locals: {comment: @comment}),
+            turbo_stream.remove("new_comment"),
             turbo_stream.append("flash", partial: "layouts/flash")
           ]
         }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.turbo_stream { render turbo_stream: turbo_stream.replace(
+          @comment, partial: "comments/form", locals: { comment: @comment, article: @article }
+          ) 
+        }
       end
     end
   end

@@ -1,8 +1,14 @@
-<div class="row mt-5">
+<div class="row mt-5" id="<%= dom_id(comment) %>">
   <div class="card">
     <h2 class="card-header">Create Comment</h2>
     <div class="card-body">          
       <%= form_with(model: [article, comment]) do |form| %>
+      <% if comment.errors.any? %>
+        <div>Errors: <%= comment.errors.count %></div>
+        <% comment.errors.each do |error| %>
+          <p style="background-color: red;" class="d-inline-block"><%= error.full_message %></p><br>
+        <% end %>  
+      <% end %>
         <div class="form-group">
           <%= form.label :comment, class: "form-label" %>
           <%= form.text_area :comment, class: "form-control" %>
