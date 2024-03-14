@@ -12,8 +12,8 @@ class Ability
     can :manage, Comment, user: user
 
     return unless user.has_role?(:admin)
-    can :read, article
-    can :read, comment
+    can :read, Article
+    can :read, Comment
     
   end
 end

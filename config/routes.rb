@@ -1,5 +1,10 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
-  
+  get 'users/index'
+  authenticate :user, -> (u){u.has_role?(:admin)} do
+    mount Resque::Server.new, :at => "/resque/jobs"
+  end
   get "up" => "rails/health#show", as: :rails_health_check
   # Defines the root path route ("/")
   root "home#index"
@@ -18,6 +23,13 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     unlocks: 'users/unlocks'
   }
-  
+  devise_scope :user do
+    get "registrations/list", to: "users/registrations#list"
+  end
+  # get 'users/registrations/list', to: 'users/registrations#list'
 
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
 end

@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+
+  include Users::Authenticable
+  before_action :authenticate_admin, only: %i[ list ]
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -38,6 +41,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+  def list
+    @user = User.all
+    respond_to do |format|
+      format.html {
+        flash[:notice] = "Users list was successfully fetched"
+        render :list
+      }
+    end
+  end
+
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -58,5 +71,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
+  # end
+  
+  protected
+
+  # Creating separate after_sign_up_paths for patient_user and staff_user
+
+  # def after_sign_up_path_for(patient_user)
+  #   flash[:notice] = 'Welcome! You have signed up successfully.'
+  #   privacy_agreement_path
+  # end
+
+  # # Add an after_sign_up path for staff_user
+  # def after_sign_up_path_for(staff_user)
+  #   flash[:notice] = 'Welcome! You have signed up successfully.'
+  #   dashboard_path
   # end
 end

@@ -1,0 +1,13 @@
+<h1>Users#index</h1>
+<p>Find me in app/views/users/index.html.erb</p>
+
+
+<ul>
+  <% @users.each do |user| %>
+    <li>Log in as Impersonate User: 
+      <%= link_to user.email, impersonate_user_path(user), data: {turbo_method: :post} %>
+      <%= button_to user.email, impersonate_user_path(user), method: :post %>
+    </li>
+    
+  <% end %>
+</ul>

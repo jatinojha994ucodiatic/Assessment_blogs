@@ -70,7 +70,6 @@ end
 gem 'activeadmin'
 gem 'devise'
 
-gem "bootstrap"
 gem "sass-rails"
 gem 'rolify'
 gem 'cancancan'
@@ -79,3 +78,8 @@ gem "mailcatcher", "~> 0.2.4"
 gem 'resque'
 gem 'redis'
 gem 'redis-actionpack'
+gem "jsonapi", "~> 0.1.1.beta6"
+gem 'devise_masquerade'
+gem "cssbundling-rails", "~> 1.4"
+
+gem "pretender", "~> 0.5.0"

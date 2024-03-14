@@ -5,7 +5,7 @@ domain = ENV.fetch("DOMAIN_NAME", "localhost")
 
 Rails.application.config.session_store :redis_store,
                                        url: session_url,
-                                       expire_after: 5.seconds,
+                                       expire_after: 5.minutes,
                                        key: key,
                                        domain: domain,
                                        threadsafe: true,

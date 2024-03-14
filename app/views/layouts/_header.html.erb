@@ -12,6 +12,9 @@
         <li class="nav-item">
           <a class="nav-link" href="<%= articles_path %>">My Articles</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= users_index_path %>">INDEX</a>
+        </li>
         </li>
         <% unless current_user %>
           <li class="nav-item">
@@ -24,6 +27,15 @@
           <li class="nav-item">
             <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
           </li>
+          <li class="nav-item">
+            <%= link_to 'Users', registrations_list_path, class: 'nav-link' %>
+          </li>
+          
+          <% if user_masquerade? %>
+            <li class="nav-item">
+              <%= link_to 'Reverse masquerade', back_masquerade_path(current_user) %>
+            </li>
+          <% end %>
           <li class="nav-item dropdown">
             <a href="<%= edit_user_registration_path %>" class="nav-link">
               <%= current_user.email %>

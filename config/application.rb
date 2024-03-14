@@ -1,7 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
-
+require "active_job"
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -32,7 +32,7 @@ module Blogs
     # config.eager_load_paths << Rails.root.join("extras")
     # config.action_controller.raise_on_missing_callback_actions = false
     config.serve_static_assets = true
-    config.active_job.queue_adapter = :queue
+    config.active_job.queue_adapter = :resque
 
     # config.cache_store = :redis_store, {
     #   host: 'localhost',

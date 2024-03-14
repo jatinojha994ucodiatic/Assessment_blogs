@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
   @article = current_user.articles.build(article_params)
     respond_to do |format|
       if @article.save
+        SendArticleNotification.perform_later(@article.id)
         current_user.add_role :creator, @article
         flash[:notice] = "Article created successfully"
         format.html { redirect_to articles_path}

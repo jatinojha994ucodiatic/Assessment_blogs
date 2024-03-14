@@ -1,5 +1,5 @@
 class SendEmailJob < ApplicationJob
-  # queue_as :default
+  queue_as :default
   self.queue_adapter = :resque
 
   def perform(*args)

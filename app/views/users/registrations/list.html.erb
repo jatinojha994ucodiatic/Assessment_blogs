@@ -1,0 +1,20 @@
+<table>
+  <th>
+    <tr>
+      <td>index</td>
+      <td>email</td>
+      <td>last updated</td>
+      <td>login as</td>
+    </tr>
+  </th>
+  <tbody>
+    <% @user.each do |user| %>
+      <tr id="<%= dom_id user %>">
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.updated_at %></td>
+        <td><%= link_to "Login As", masquerade_path(user), class: 'btn btn-sm btn-info' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

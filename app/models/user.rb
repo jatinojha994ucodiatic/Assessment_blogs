@@ -1,11 +1,13 @@
 class User < ApplicationRecord
   rolify
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable,
+         :masqueradable
+
+  # before_filter :masquerade_usre!
+  after_create :assign_default_role
 
   has_many :articles, dependent: :destroy
-
-  after_create :assign_default_role
 
   validate :must_have_role, on: :update
   
